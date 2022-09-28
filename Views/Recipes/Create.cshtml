@@ -1,0 +1,69 @@
+﻿@model MissyMenu.Service.Recipe
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using(Html.BeginForm("Create", "Recipes", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+<h1>Create</h1>
+
+<h4>Recipe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <label class="font-weight-normal">
+                                    <input type="checkbox" name="RequesterCheckBox" id="RequesterCheckBox" value="true" onclick="showMe('requesterArea')" />
+                                    Add Ingredient.
+            
+                                </label>
+
+                <div class="col-md-4">
+                    <p>
+                        <a class="btn btn-sm btn-success" href="#" data-pdsa-action="add">
+                            <em class="fa fa-plus fa-2x pull-left"></em>Add Ingredient
+                        </a>
+                    </p>
+                </div>
+                        <div id="requesterArea" style="display:none">
+                            @{
+                            await Html.RenderPartialAsync("_Ingredient");
+                                }
+                        </div>
+            
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  <script>
+    function showMe(box) {
+    if ($('#RequesterCheckBox').prop('checked')) {
+        document.getElementById(box).style.display = "block";
+        IfEmptyThenRequire('RequesterSearch');
+    }
+    else {
+        document.getElementById(box).style.display = "none";
+        $('#RequesterSearch').removeClass('required');
+        $('.requesterValue').val('');
+    }
+} 
+  </script>  
+} 
+
