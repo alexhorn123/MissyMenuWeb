@@ -1,0 +1,25 @@
+﻿@model MissyMenuWeb.ViewModels.IngredientViewModel
+
+ <div class="row">
+    <div class="col-4">    
+    <label asp-for="Ingredient.IngredientName" class="control-label"></label>
+    <input asp-for="Ingredient.IngredientName" class="form-control" />
+    <span asp-validation-for="Ingredient.IngredientName" class="text-danger"></span>
+  </div>
+    <div class="col-2">    
+    <label asp-for="Ingredient.Measurement" class="control-label"></label>
+    <input asp-for="Ingredient.Measurement" class="form-control" />
+    <span asp-validation-for="Ingredient.Measurement" class="text-danger"></span>
+</div>
+    <div class="col-4">  
+    <label asp-for="Ingredient.Note" class="control-label"></label>
+    <input asp-for="Ingredient.Note" class="form-control" />
+    <span asp-validation-for="Ingredient.Note" class="text-danger"></span>
+</div>
+    <div class="col-2">    
+    <label asp-for="Ingredient.Link" class="control-label"></label>
+    <input asp-for="Ingredient.Link" class="form-control" />
+    <span asp-validation-for="Ingredient.Link" class="text-danger"></span>
+</div>
+</div>
+

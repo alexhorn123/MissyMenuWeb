@@ -1,35 +1,78 @@
 ﻿@model MissyMenu.Service.Ingredient
 
 
-
-<h4>Ingredient</h4>
-<hr />
-
-
-<div class="row">
-                
-                <label asp-for="IngredientName" class="control-label"></label>
-                <input asp-for="IngredientName" class="form-control" />
-                <span asp-validation-for="IngredientName" class="text-danger"></span>
-              </div>
-<div class="row">
-              <div class="col-md-4 mb-3">
-                <label asp-for="Measurement" class="control-label"></label>
-                <input asp-for="Measurement" class="form-control" />
-                <span asp-validation-for="Measurement" class="text-danger"></span>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label asp-for="Note" class="control-label"></label>
-                <input asp-for="IngredientName" class="form-control" />
-                <span asp-validation-for="Note" class="text-danger"></span>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label asp-for="Link" class="control-label"></label>
-                <input asp-for="Link" class="form-control" />
-                <span asp-validation-for="Link" class="text-danger"></span>
-              </div>
+@*<div id="IngredientList" class="container">
+    <div class="row">
+        <div class="col">
+            <label asp-for="IngredientName" class="control-label"></label>
+            <input asp-for="IngredientName" class="form-control" />
+            <span asp-validation-for="IngredientName" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Measurement" class="control-label"></label>
+            <input asp-for="Measurement" class="form-control" />
+            <span asp-validation-for="Measurement" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Note" class="control-label"></label>
+            <input asp-for="IngredientName" class="form-control" />
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Link" class="control-label"></label>
+            <input asp-for="Link" class="form-control" />
+            <span asp-validation-for="Link" class="text-danger"></span>
+        </div>
+        <div class="row">
+        <div class="col">
+            <label asp-for="IngredientName" class="control-label"></label>
+            <input asp-for="IngredientName" class="form-control" />
+            <span asp-validation-for="IngredientName" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Measurement" class="control-label"></label>
+            <input asp-for="Measurement" class="form-control" />
+            <span asp-validation-for="Measurement" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Note" class="control-label"></label>
+            <input asp-for="IngredientName" class="form-control" />
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Link" class="control-label"></label>
+            <input asp-for="Link" class="form-control" />
+            <span asp-validation-for="Link" class="text-danger"></span>
+        </div>
+    </div>
+    </div>
+</div>*@
+<div id="ingItems">
+        <section id="row1" num="1">
+            <div style="margin:10px;">
+                <label>Ingredient : </label>
+                @Html.TextBox("IngredientName",null)
             </div>
+            <div style="margin:10px;">
+                <label>Measurement : </label>
+                @Html.TextBox("Measurement", null)
+            </div>
+            <div style="margin:10px;">
+                <label>Note : </label>
+                @Html.TextBox("Note",null)
+            </div>
+            <div style="margin:10px;">
+                <label>Link : </label>
+                @Html.TextBox("Link", null)
+            </div>
+            <input type="button" class="RowDelete" value="-" onclick="removeRow(1)" />
+            <hr />
+        </section>
+    </div>
+    <button type="button" id="btnAddRow">Add Ingredient</button>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    
 }

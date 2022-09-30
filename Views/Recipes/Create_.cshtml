@@ -1,0 +1,124 @@
+﻿@model MissyMenu.Service.Recipe
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using(Html.BeginForm("Create", "Recipes", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+<h1>Create Recipe</h1>
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <label class="font-weight-normal">
+                                    <input type="checkbox" name="RequesterCheckBox" id="RequesterCheckBox" value="true" onclick="showMe('requesterArea')" />
+                                    Add Ingredient.
+            
+                                </label>
+
+                <div class="col-md-4">
+                    <p>
+                        <a class="btn btn-sm btn-success" href="#" data-pdsa-action="add">
+                            <em class="fa fa-plus fa-2x pull-left"></em>Add Ingredient
+                        </a>
+                    </p>
+                </div>
+                        <div id="requesterArea" style="display:none">
+                            @{
+                            await Html.RenderPartialAsync("_IngredientList");
+                                }
+                        </div>
+            <br>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  <script>
+
+        $(document).ready(function () {
+            $('#IngredientName').val('');
+            $('#Measurement').val('');
+            $('#Note').val('');
+            $('#Link').val('');
+        });
+        $('#btnAddRow').click(function (e) {
+            e.preventDefault();
+            var row = "<section><div style = 'margin:10px;'><label></label><input type='text'></div><div style='margin:10px;'><label></label><input type='text'></div><div style = 'margin:10px;'><label></label><input type='text'></div><div style='margin:10px;'><label></label><input type='text'></div><input type='button' class='RowDelete' value='-'/><hr /></section>";
+            $('#ingItems').append(row);
+            orderRow();
+        })
+
+
+        function removeRow(num) {
+            $('#ingItems section').each(function (idx) {
+                if ($(this).attr('num') == num) {
+                    $(this).remove();
+                }
+            });
+            orderRow();
+        }
+        function orderRow() {
+            var rowCount = $('#ingItems section').length;
+            if (rowCount > 0) {
+                $('#ingItems section').each(function (idx) {
+                    var num = idx + 1;
+                    $(this).attr('id', 'row' + num);
+                    $(this).attr('num', num);
+
+                    $(this).children().children().nextAll().slice(0, 1).prev().text('Ingredient Name ' + num + " : ");
+                    $(this).children().children().nextAll().slice(0, 1).attr('id', 'IngredientName');
+
+
+                    $(this).children().next().children().nextAll().slice(0, 1).prev().text('Measurement ' + num + " : ");
+                    $(this).children().next().children().nextAll().slice(0, 1).attr('id', 'Measurement');
+
+                    $(this).children().children().children().nextAll().slice(0, 1).prev().text('Note ' + num + " : ");
+                    $(this).children().children().children().nextAll().slice(0, 1).attr('id', 'Note');
+
+
+                    //$(this).children().next().children().nextAll().slice(0, 1).prev().text('Link ' + num + " : ");
+                    //$(this).children().next().children().nextAll().slice(0, 1).attr('id', 'Link');
+
+                
+                    $(this).children().next().next().slice(0, 1).attr('onclick', 'removeRow(' + num + ')');
+                });
+            }
+        }
+            function showMe(box) {
+    if ($('#RequesterCheckBox').prop('checked')) {
+        document.getElementById(box).style.display = "block";
+        IfEmptyThenRequire('RequesterSearch');
+    }
+    else {
+        document.getElementById(box).style.display = "none";
+        $('#RequesterSearch').removeClass('required');
+        $('.requesterValue').val('');
+    }
+
+    } 
+
+  
+
+  </script>  
+} 
+

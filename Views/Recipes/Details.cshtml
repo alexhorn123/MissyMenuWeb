@@ -1,4 +1,4 @@
-﻿@model MissyMenu.Service.Recipe
+﻿@model MissyMenuWeb.ViewModels.RecipeViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -23,10 +23,10 @@
         {
             <dl class="row">
                 <dt class = "col-sm-2">
-            @Html.DisplayNameFor(item => item.Ingredients.ElementAt(i).IngredientName)
+            @Html.DisplayNameFor(item => item.Ingredients.ElementAt(i).ViewModel.Ingredient.IngredientName)
         </dt>
                 <dt class = "col-sm-10">
-            @Html.DisplayFor(item => item.Ingredients.ElementAt(i).IngredientName)
+            @Html.DisplayFor(item => item.Ingredients.ElementAt(i).ViewModel.Ingredient.IngredientName)
         </dt>
     </dl>
     }
@@ -35,10 +35,10 @@
         {
             <dl class="row">
                 <dt class = "col-sm-2">
-            @Html.DisplayNameFor(item => item.Directions.ElementAt(i).Step)
+            @Html.DisplayNameFor(item => item.Directions.ElementAt(i).ViewModel)
         </dt>
                 <dt class = "col-sm-10">
-            @Html.DisplayFor(item => item.Directions.ElementAt(i).Step)
+            @Html.DisplayFor(item => item.Directions.ElementAt(i).ViewModel)
         </dt>
     </dl>
     }
