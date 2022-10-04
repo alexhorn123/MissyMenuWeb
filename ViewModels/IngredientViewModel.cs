@@ -1,14 +1,11 @@
-﻿using MissyMenu.Service;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using MissyMenu.Service;
 
 namespace MissyMenuWeb.ViewModels
 {
     public class IngredientViewModel
     {
        public Ingredient? Ingredient { get; set; }
+       public List<SelectListItem> Globals { get; set; }
     }
 }

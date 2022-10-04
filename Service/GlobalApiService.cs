@@ -18,13 +18,15 @@ namespace MissyMenu.Service
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class RecipesClient
+    public partial class GlobalClient
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
+        private readonly string baseUrl = "https://localhost:7202/";
 
-        public RecipesClient(string baseUrl, System.Net.Http.HttpClient httpClient)
+
+        public GlobalClient(System.Net.Http.HttpClient httpClient)
         {
             BaseUrl = baseUrl;
             _httpClient = httpClient;
@@ -53,19 +55,19 @@ namespace MissyMenu.Service
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Recipe>> RecipesAllAsync()
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Global>> GlobalAllAsync()
         {
-            return RecipesAllAsync(System.Threading.CancellationToken.None);
+            return GlobalAllAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Recipe>> RecipesAllAsync(System.Threading.CancellationToken cancellationToken)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Global>> GlobalAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Recipes");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Global");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -99,17 +101,17 @@ namespace MissyMenu.Service
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<Recipe>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<Global>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                                throw new GlobalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
                         }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                            throw new GlobalApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
                     finally
@@ -127,19 +129,19 @@ namespace MissyMenu.Service
         }
 
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task RecipesPOSTAsync(Recipe body)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task GlobalPOSTAsync(Global body)
         {
-            return RecipesPOSTAsync(body, System.Threading.CancellationToken.None);
+            return GlobalPOSTAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task RecipesPOSTAsync(Recipe body, System.Threading.CancellationToken cancellationToken)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task GlobalPOSTAsync(Global body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Recipes");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Global");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -181,7 +183,7 @@ namespace MissyMenu.Service
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                            throw new GlobalApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
                     finally
@@ -199,22 +201,22 @@ namespace MissyMenu.Service
         }
 
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Recipe> RecipesGETAsync(string id)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<Global> GlobalGETAsync(string id)
         {
-            return RecipesGETAsync(id, System.Threading.CancellationToken.None);
+            return GlobalGETAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Recipe> RecipesGETAsync(string id, System.Threading.CancellationToken cancellationToken)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Global> GlobalGETAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Recipes/{id}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Global/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -249,17 +251,17 @@ namespace MissyMenu.Service
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Recipe>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Global>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                                throw new GlobalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
                         }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                            throw new GlobalApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
                     finally
@@ -277,22 +279,22 @@ namespace MissyMenu.Service
         }
 
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task RecipesPUTAsync(string id, Recipe body)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task GlobalPUTAsync(string id, Global body)
         {
-            return RecipesPUTAsync(id, body, System.Threading.CancellationToken.None);
+            return GlobalPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task RecipesPUTAsync(string id, Recipe body, System.Threading.CancellationToken cancellationToken)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task GlobalPUTAsync(string id, Global body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Recipes/{id}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Global/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -335,7 +337,7 @@ namespace MissyMenu.Service
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                            throw new GlobalApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
                     finally
@@ -353,22 +355,22 @@ namespace MissyMenu.Service
         }
 
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task RecipesDELETEAsync(string id)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task GlobalDELETEAsync(string id)
         {
-            return RecipesDELETEAsync(id, System.Threading.CancellationToken.None);
+            return GlobalDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task RecipesDELETEAsync(string id, System.Threading.CancellationToken cancellationToken)
+        /// <exception cref="GlobalApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task GlobalDELETEAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Recipes/{id}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Global/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -407,7 +409,7 @@ namespace MissyMenu.Service
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                            throw new GlobalApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
                     finally
@@ -457,7 +459,7 @@ namespace MissyMenu.Service
                 catch (Newtonsoft.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
+                    throw new GlobalApiException(message, (int)response.StatusCode, responseText, headers, exception);
                 }
             }
             else
@@ -476,7 +478,7 @@ namespace MissyMenu.Service
                 catch (Newtonsoft.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
+                    throw new GlobalApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
                 }
             }
         }
@@ -525,25 +527,10 @@ namespace MissyMenu.Service
             var result = System.Convert.ToString(value, cultureInfo);
             return result == null ? "" : result;
         }
-
-        public static implicit operator RecipesClient(HttpClient v)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Direction
-    {
-        [Newtonsoft.Json.JsonProperty("Step", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Step { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Id
+    public partial class Gid
     {
         [Newtonsoft.Json.JsonProperty("Oid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Oid { get; set; }
@@ -551,43 +538,29 @@ namespace MissyMenu.Service
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Ingredient
-    {
-        [Newtonsoft.Json.JsonProperty("IngredientName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string IngredientName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("Measurement", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Measurement { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("Note", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Note { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("Link", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Link { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Recipe
+    public partial class Global
     {
         [Newtonsoft.Json.JsonProperty("_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Id _id { get; set; }
+        public Gid _id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty("Config_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Config_Name { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Ingredients", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Ingredient> Ingredients { get; set; }
+        [Newtonsoft.Json.JsonProperty("Config_Value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Config_Value { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Directions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Direction> Directions { get; set; }
+        [Newtonsoft.Json.JsonProperty("Config_Description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Config_Description { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Config_Enabled", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Config_Enabled { get; set; }
 
     }
 
 
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ApiException : System.Exception
+    public partial class GlobalApiException : System.Exception
     {
         public int StatusCode { get; private set; }
 
@@ -595,7 +568,7 @@ namespace MissyMenu.Service
 
         public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
 
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException)
+        public GlobalApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException)
             : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
         {
             StatusCode = statusCode;
@@ -610,11 +583,11 @@ namespace MissyMenu.Service
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ApiException<TResult> : ApiException
+    public partial class GlobalApiException<TResult> : GlobalApiException
     {
         public TResult Result { get; private set; }
 
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException)
+        public GlobalApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException)
             : base(message, statusCode, response, headers, innerException)
         {
             Result = result;

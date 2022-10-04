@@ -2,6 +2,7 @@
 using DynamicVML.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using MissyMenu.Service;
+using MissyMenuWeb.Service;
 using MissyMenuWeb.ViewModels;
 
 using Newtonsoft.Json;
@@ -13,7 +14,8 @@ namespace MissyMenuWeb.Controllers
     {
         // GET: RecipesController
         private readonly RecipesClient api = new("https://localhost:7202/",new HttpClient());
-        private object ingredient;
+        private readonly DropDownFactory factory = new DropDownFactory();
+
 
         public async Task<ActionResult> Index()
         {
@@ -63,32 +65,19 @@ namespace MissyMenuWeb.Controllers
             return View(new RecipeViewModel());
         }
 
-        public IActionResult AddIngredient(AddNewDynamicItem parameters)
+        public async Task<IActionResult> AddIngredientAsync(AddNewDynamicItem parameters)
         {
+            GlobalClient gapi = new(new HttpClient());
             IngredientViewModel newIngredientViewModel = new();
+            List<Global> globals = (List<Global>)await gapi.GlobalAllAsync();
+            newIngredientViewModel.Globals = (List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)factory.CreateSelectListItem(globals, "Market dropdown value");
             return this.PartialView(newIngredientViewModel, parameters);
         }
 
 
         public IActionResult AddDirection(AddNewDynamicItem parameters)
         {
-            // This is the GET action that will be called whenever the user clicks 
-            // the "Add new item" link in a DynamicList view. It accepts a an object
-            // of the class ListItemParameters that contains information about where
-            // the item needs to be inserted (i.e. the id of the div to where contents 
-            // as well as the path to your viewmodels in the main form). All of those
-            // are computed automatically from the view by the library.
-
-            // Now here you can create another view model for your model
-            var newDirectionViewModel = new Direction
-            {
-                Step = "Preparation Step"
-            };
-
-            // Now you have to call the extension PartialView method passing the view model.
-            // This is an extension method that creates a partial view with the needed HTML 
-            // prefix for the fields in your form so the form will post correctly when it 
-            // gets submitted.
+            DirectionViewModel newDirectionViewModel = new();
             return this.PartialView(newDirectionViewModel, parameters);
         }
 
