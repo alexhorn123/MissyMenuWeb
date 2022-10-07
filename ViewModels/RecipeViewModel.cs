@@ -6,10 +6,10 @@ namespace MissyMenuWeb.ViewModels
 {
     public class RecipeViewModel
     {
-        public Id _id { get; set; }
+        public Id _Id { get; set; } = null!;
 
         [Display(Name = "Recipe Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Display(Name = "Ingredients")]
         public virtual DynamicList<IngredientViewModel> Ingredients { get; set; } = new DynamicList<IngredientViewModel>();

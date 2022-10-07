@@ -1,34 +1,29 @@
 ﻿@model MissyMenuWeb.ViewModels.IngredientViewModel
 
-<div class="container px-5 py-5">
-        <div class="row">
-            <div class="col mx-1">
-                <label asp-for="Ingredient.IngredientName" class="control-label"></label>
-                <input asp-for="Ingredient.IngredientName" class="form-control" />
-                <span asp-validation-for="Ingredient.IngredientName" class="text-danger"></span>
-            </div>
-            <div class="col mx-1">
-                <label asp-for="Ingredient.Measurement" class="control-label"></label>
-                <input asp-for="Ingredient.Measurement" class="form-control" />
-                <span asp-validation-for="Ingredient.Measurement" class="text-danger"></span>
-            </div>
-            <div class="col mx-1">
-                <label asp-for="Ingredient.Note" class="control-label"></label>
-                <input asp-for="Ingredient.Note" class="form-control" />
-                <span asp-validation-for="Ingredient.Note" class="text-danger"></span>
-            </div>
-            <div class="col mx-1">
-                <label asp-for="Ingredient.Link" class="control-label"></label>
-                <input asp-for="Ingredient.Link" class="form-control" />
-                <span asp-validation-for="Ingredient.Link" class="text-danger"></span>
-            </div>
-            <div class="col mx-1">
-                <label asp-for="Ingredient.Market" class="control-label"></label>
-                @*<input asp-for="Ingredient.Market" class="form-control" />*@
-                <select asp-for="Ingredient.Market" asp-items="Model.Globals" class="form-control"></select>
-                <span asp-validation-for="Ingredient.Market" class="text-danger"></span>
-            </div>
-        </div>
+<div class="row">
+    <div class="col mx-1">
+        <label asp-for="IngredientName" class="control-label"></label>
+        <input asp-for="IngredientName" class="form-control" />
+        <span asp-validation-for="IngredientName" class="text-danger"></span>
     </div>
-
-
+    <div class="col mx-1">
+        <label asp-for="Measurement" class="control-label"></label>
+        <input asp-for="Measurement" class="form-control" />
+        <span asp-validation-for="Measurement" class="text-danger"></span>
+    </div>
+    <div class="col mx-1">
+        <label asp-for="Note" class="control-label"></label>
+        <input asp-for="Note" class="form-control" />
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+    <div class="col mx-1">
+        <label asp-for="Link" class="control-label"></label>
+        <input asp-for="Link" class="form-control" />
+        <span asp-validation-for="Link" class="text-danger"></span>
+    </div>
+    <div class="col mx-1">
+        <label asp-for="Market" class="control-label"></label>
+        <select asp-for="Market" asp-items="Model.Globals" class="form-control"></select>
+        <span asp-validation-for="Market" class="text-danger"></span>
+    </div>
+</div>

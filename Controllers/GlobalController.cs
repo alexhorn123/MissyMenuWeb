@@ -12,12 +12,12 @@ namespace MissyMenuWeb.Controllers
     public class GlobalController : Controller
     {
         // GET: RecipesController
-        private readonly GlobalClient api = new(new HttpClient());
+        private readonly GlobalClient _api = new(new HttpClient());
 
 
         public async Task<ActionResult> Index()
         {
-            return View(await api.GlobalAllAsync());
+            return View(await _api.GlobalAllAsync());
         }
     }
 }

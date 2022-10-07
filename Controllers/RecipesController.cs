@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using MissyMenu.Service;
 using MissyMenuWeb.Service;
 using MissyMenuWeb.ViewModels;
-
+using MongoDB.Bson;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NuGet.Protocol;
 
 
 namespace MissyMenuWeb.Controllers
@@ -13,15 +15,14 @@ namespace MissyMenuWeb.Controllers
     public class RecipesController : Controller
     {
         // GET: RecipesController
-        private readonly RecipesClient api = new("https://localhost:7202/",new HttpClient());
-        private readonly DropDownFactory factory = new DropDownFactory();
+        private readonly RecipesClient _api = new("https://localhost:7202/",new HttpClient());
+        private readonly DropDownFactory _factory = new();
+
 
 
         public async Task<ActionResult> Index()
         {
-            //var recipeList = (List<Recipe>)await api.RecipesAllAsync();
-            //return View(recipeList);
-            return View(await api.RecipesAllAsync());
+            return View(await _api.RecipesAllAsync());
         }
 
 
@@ -29,35 +30,9 @@ namespace MissyMenuWeb.Controllers
         // GET: RecipesController/Details/5
         public async Task<ActionResult> Details(string id)
         {
-            var recipe = await api.RecipesGETAsync(id);
+            var recipe = await _api.RecipesGETAsync(id);
             return View(recipe);
         }
-
-        // GET: RecipesController/Create
-        //public ActionResult Create(AddNewDynamicItem parameters)
-        //{
-
-        //    ICollection<Ingredient> ingredients = new List<Ingredient>();
-        //    Ingredient ingredient = new Ingredient();
-        //    ingredient.IngredientName = "Add Ingredient Name";
-        //    ingredient.Link = "Add Web Link";
-        //    ingredient.Measurement = "Add Measurement";
-        //    ingredient.Note = "Add Ingredient Note";
-        //    ingredients.Add(ingredient);
-        //    ICollection<Direction> directions = new List<Direction>();
-        //    Direction direction = new Direction();
-        //    direction.Step = "Prepartion Step";
-        //    directions.Add(direction);
-        //    //recipe.Ingredients = ingredients;
-        //    var recipeViewModel = new Recipe()
-        //    {
-        //        Name = "New Recipe",
-        //        Ingredients = ingredients,
-        //        Directions = directions
-        //    };
-
-        //    return this.PartialView(recipeViewModel, parameters);
-        //}
 
         // GET: Authors/Create
         public IActionResult Create()
@@ -70,7 +45,7 @@ namespace MissyMenuWeb.Controllers
             GlobalClient gapi = new(new HttpClient());
             IngredientViewModel newIngredientViewModel = new();
             List<Global> globals = (List<Global>)await gapi.GlobalAllAsync();
-            newIngredientViewModel.Globals = (List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)factory.CreateSelectListItem(globals, "Market dropdown value");
+            newIngredientViewModel.Globals = (List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)_factory.CreateSelectListItem(globals, "Market dropdown value");
             return this.PartialView(newIngredientViewModel, parameters);
         }
 
@@ -84,21 +59,20 @@ namespace MissyMenuWeb.Controllers
         // POST: RecipesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(RecipeViewModel recipeViewModel)
         {
 
-            var stuff = JsonConvert.SerializeObject(collection);
-            Recipe recipe = JsonConvert.DeserializeObject<Recipe>(stuff);
+            Recipe recipe = RecipeViewModelToModel(recipeViewModel);
 
 
-                await api.RecipesPOSTAsync(recipe);
+                await _api.RecipesPOSTAsync(recipe);
             return View();
         }
 
         // GET: RecipesController/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
-            var recipe = await api.RecipesGETAsync(id);
+            var recipe = await _api.RecipesGETAsync(id);
             return View(recipe);
         }
 
@@ -136,6 +110,26 @@ namespace MissyMenuWeb.Controllers
             {
                 return View();
             }
+        }
+
+        private static Recipe RecipeViewModelToModel(RecipeViewModel recipeViewModel)
+        {
+            return new Recipe
+            {
+                _id = ObjectId.GenerateNewId().ToString(),
+                Name = recipeViewModel.Name,
+                Ingredients = recipeViewModel.Ingredients.ToModel(r => new Ingredient
+                {
+                    IngredientName = r.IngredientName,
+                    Measurement = r.Measurement,
+                    Note = r.Note,
+                    Market = r.Market
+                }).ToList(),
+                Directions = recipeViewModel.Directions.ToModel(d => new Direction
+                {
+                    Step = d.Step
+                }).ToList()
+            };
         }
     }
 }

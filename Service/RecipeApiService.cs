@@ -15,6 +15,7 @@
 
 namespace MissyMenu.Service
 {
+    using MongoDB.Bson.Serialization.Attributes;
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -537,7 +538,7 @@ namespace MissyMenu.Service
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Direction
     {
-        [Newtonsoft.Json.JsonProperty("Step", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Step", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Step { get; set; }
 
     }
@@ -550,22 +551,23 @@ namespace MissyMenu.Service
 
     }
 
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Ingredient
     {
         [Newtonsoft.Json.JsonProperty("IngredientName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string IngredientName { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Measurement", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Measurement", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Measurement { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Note", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Note", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Note { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Link", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Link", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Link { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Market", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Market", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Market { get; set; }
 
     }
@@ -574,12 +576,12 @@ namespace MissyMenu.Service
     public partial class Recipe
     {
         [Newtonsoft.Json.JsonProperty("_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Id _id { get; set; }
+        public string _id { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Name", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Ingredients", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Ingredients", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<Ingredient> Ingredients { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Directions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
