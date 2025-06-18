@@ -1,12 +1,14 @@
 ﻿using DynamicVML;
 using MissyMenu.Service;
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
 
 namespace MissyMenuWeb.ViewModels
 {
     public class RecipeViewModel
     {
-        public Id _Id { get; set; } = null!;
+        
+        public string _Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
         [Display(Name = "Recipe Name")]
         public string? Name { get; set; }

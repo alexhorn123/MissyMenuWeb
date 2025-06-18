@@ -15,7 +15,13 @@ namespace MissyMenuWeb.Controllers
     public class RecipesController : Controller
     {
         // GET: RecipesController
-        private readonly RecipesClient _api = new("https://localhost:7202/",new HttpClient());
+        private readonly RecipesClient _api;
+
+public RecipesController(IConfiguration config)
+{
+    _api = new RecipesClient(config["ApiBaseUrl"], new HttpClient());
+}
+
         private readonly DropDownFactory _factory = new();
 
 
